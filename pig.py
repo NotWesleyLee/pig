@@ -3,7 +3,6 @@
 
 import time
 from player import Player
-# from player import AI
 from game import turn_system
 from game import turn_order
 
