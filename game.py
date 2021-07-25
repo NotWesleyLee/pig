@@ -12,14 +12,11 @@ def action(lst, i):
     print("It's {}'s turn".format(lst[i].name))
 
     while checker is not True:
-        print('\nYou currently have {} temporary points with a total score of {}'
-              .format(temp, lst[i].total))
-        print('and rolled {} times\n'.format(num_roll))
-        time.sleep(1)
         #Players roll dice
         input('Press return to roll the die')
         num_roll += 1
         roll_result = roll(seed=None)
+        temp += roll_result
 
         #Failure
         if roll_result == 1:
@@ -28,10 +25,15 @@ def action(lst, i):
             time.sleep(1)
             break
 
+        #Display score
         print('You rolled a {}'.format(roll_result))
+        time.sleep(1)
+        print('\nYou currently have {} temporary points with a total score of {}'
+              .format(temp, lst[i].total))
+        print('and rolled {} times\n'.format(num_roll))
+        time.sleep(1)
 
         #Determine if player already won
-        temp += roll_result
         if lst[i].total + temp >= GOAL:
             break
 
@@ -42,7 +44,7 @@ def action(lst, i):
                 checker = True
                 break
             if keep_rolling != 'y':
-                print("Sorry, I didn't quite catch that")
+                print("Sorry, I didn't quite catch that\n")
                 continue
             break
     return temp
